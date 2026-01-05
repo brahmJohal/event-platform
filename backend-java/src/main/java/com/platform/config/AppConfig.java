@@ -1,8 +1,12 @@
 package com.platform.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class AppConfig {
-    // Configuration beans will go here later
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();}
 }

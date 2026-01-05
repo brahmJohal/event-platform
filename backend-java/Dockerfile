@@ -1,10 +1,12 @@
-FROM maven:3.9.4-eclipse-temurin-17 AS build
+# Stage 1: Build using Maven with Java 21
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:17-jre-alpine
+# Stage 2: Run using Java 21 JRE
+FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=build /app/target/event-backend-1.0.0.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
