@@ -10,7 +10,8 @@ services:
       - python-worker
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/eventdb
-      - APP_PYTHON_SERVICE_URL=http://python-worker:5000/process
+      # FIX: Removed "/process" from the end because Java adds it automatically
+      - APP_PYTHON_SERVICE_URL=http://python-worker:5000
     networks:
       - platform-network
 
@@ -27,6 +28,15 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    networks:
+      - platform-network
+
+  frontend:
+    build: ./frontend-react
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend-java
     networks:
       - platform-network
 

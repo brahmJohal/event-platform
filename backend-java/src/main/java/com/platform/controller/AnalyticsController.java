@@ -1,26 +1,32 @@
 package com.platform.controller;
 
-import com.platform.model.EventDocument;
-import com.platform.repository.EventRepository;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.platform.model.EventDocument;
+import com.platform.repository.EventRepository;
+
 @RestController
 @RequestMapping("/api/analytics")
-// @RequiredArgsConstructor  <-- WE REMOVED THIS
+@CrossOrigin(origins = "*")
 public class AnalyticsController {
 
     private final EventRepository repository;
 
-    // --- MANUAL CONSTRUCTOR (Replaces Lombok) ---
+   
     public AnalyticsController(EventRepository repository) {
         this.repository = repository;
     }
-    // --------------------------------------------
+    
 
     @GetMapping("/count")
     public Map<String, Long> getTotalCount() {

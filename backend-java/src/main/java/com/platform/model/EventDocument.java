@@ -1,10 +1,11 @@
 package com.platform.model;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Document(collection = "events")
 public class EventDocument {
@@ -22,12 +23,12 @@ public class EventDocument {
 
     private LocalDateTime processedAt;
 
-    // Enrichment fields
+   
     private Integer complexityScore;
     private List<String> tags;
     private String processedBy;
 
-    // --- MANUAL GETTERS AND SETTERS (Replaces Lombok @Data) ---
+    
   
 
     public String getId() { return this.id; }

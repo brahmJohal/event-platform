@@ -1,27 +1,34 @@
 package com.platform.controller;
 
-import com.platform.dto.EventRequestDTO;
-import com.platform.model.EventDocument;
-import com.platform.service.QueueService;
-import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.platform.dto.EventRequestDTO;
+import com.platform.model.EventDocument;
+import com.platform.service.QueueService;
+
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/events")
-// @RequiredArgsConstructor <-- REMOVED
+@CrossOrigin(origins = "*")
+
 public class EventController {
 
     private final QueueService queueService;
 
-    // --- MANUAL CONSTRUCTOR (Fixes the error) ---
+   
     public EventController(QueueService queueService) {
         this.queueService = queueService;
     }
-    // --------------------------------------------
+    
 
     @PostMapping
     public ResponseEntity<String> ingestEvent(@Valid @RequestBody EventRequestDTO dto) {

@@ -10,7 +10,7 @@ public class EventRequestDTO {
     @NotBlank
     private String payload;
 
-    // --- MANUAL GETTERS AND SETTERS (Fixes the "missing method" error) ---
+   
 
     public String getType() {
         return type;
