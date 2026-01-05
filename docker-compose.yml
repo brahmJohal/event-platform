@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend-java:
+    build: ./backend-java
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+      - python-worker
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/eventdb
+      - APP_PYTHON_SERVICE_URL=http://python-worker:5000/process
+    networks:
+      - platform-network
+
+  python-worker:
+    build: ./worker-python
+    expose:
+      - "5000"
+    networks:
+      - platform-network
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - platform-network
+
+networks:
+  platform-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
