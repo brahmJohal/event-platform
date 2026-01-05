@@ -3,7 +3,7 @@
 A polyglot backend system that ingests events via Java, processes them concurrently, enriches data using a Python service, and stores results in MongoDB.
 
 ## Tech Stack
-* **Core Backend:** Java 17, Spring Boot 3
+* **Core Backend:** Java 21, Spring Boot 3
 * **Dynamic Worker:** Python 3.9, Flask
 * **Database:** MongoDB
 * **Infrastructure:** Docker, Docker Compose
